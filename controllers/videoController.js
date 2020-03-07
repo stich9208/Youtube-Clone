@@ -5,6 +5,7 @@ export const home = async (req, res) => {
   try {
     const videos = await Video.find({}).sort({ createdAt: -1 });
     res.render("home", { pageTitle: "Home", videos });
+    console.log(videos);
   } catch (error) {
     res.render("home", { pageTitle: "Home", videos: [] });
   }
@@ -48,7 +49,6 @@ export const videoDetail = async (req, res) => {
   try {
     const video = await Video.findById(id);
     res.render("videoDetail", { pageTitle: video.title, video });
-    console.log(video);
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -65,14 +65,13 @@ export const getEditVideo = async (req, res) => {
     res.redirect(routes.home);
   }
 };
-
 export const postEditVideo = async (req, res) => {
   const {
     params: { id },
     body: { title, description }
   } = req;
   try {
-    await Video.findOneAndUpdate({ _id: id, title, description });
+    await Video.findOneAndUpdate({ _id: id }, { title, description });
     res.redirect(routes.videoDetail(id));
   } catch (error) {
     res.redirect(routes.home);
