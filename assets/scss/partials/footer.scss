@@ -1,0 +1,27 @@
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-top: 1px $dark-grey solid;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 15px 0px;
+  margin-top: 30px;
+  .footer__icon {
+    color: $dark-grey;
+    font-size: 35px;
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+  .footer__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    span {
+      font-weight: 600;
+      font-size: 13px;
+      color: $dark-grey;
+      margin-right: 20px;
+    }
+  }
+}
