@@ -1,18 +1,20 @@
-const recorderContainer = document.getElementById("jsRecorderContainer");
+const recorderContainer = document.getElementById("jsRecordContainer");
 const recordBtn = document.getElementById("jsRecordBtn");
-const videoPreview = document.getElementById;
+const videoPreview = document.getElementById("jsVideoPreview");
 
 let streamObject;
 let videoRecorder;
 
 const handleVideoData = event => {
   const { data: videoFile } = event;
+  console.log(videoFile);
   const link = document.createElement("a");
   link.href = URL.createObjectURL(videoFile);
   link.download = "recorded.webm";
   document.body.appendChild(link);
-  link.click;
+  link.click();
 };
+
 const startRecording = () => {
   videoRecorder = new MediaRecorder(streamObject);
   videoRecorder.start();
@@ -31,14 +33,14 @@ const getVideo = async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: true,
-      video: { width: 1200, height: 720 }
+      video: { width: 1280, height: 720 }
     });
     videoPreview.srcObject = stream;
     videoPreview.muted = true;
     videoPreview.play();
     recordBtn.innerHTML = "Stop recording";
     streamObject = stream;
-    startRecording(stream);
+    startRecording(streamObject);
   } catch (error) {
     recordBtn.innerHTML = "😭Can`t record";
   } finally {
